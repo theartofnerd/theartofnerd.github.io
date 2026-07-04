@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+
+// ここに資格を追加・編集していく
+const certifications = [
+	{
+		name: 'a',
+		issuer: 'a',
+		date: '2025年6月',
+		url: 'a', // 認定リンク。なければ空文字 '' に
+	},
+	{
+		name: 'Certified Kubernetes Administrator (CKA)',
+		issuer: 'The Linux Foundation',
+		date: '2025年3月',
+		url: '',
+	},
+];
+---
+
+<Layout
+	title="Certifications"
+	description="取得した資格の一覧"
+	pubDate={new Date('July 05 2026')}
+>
+	<p>これまでに取得した資格の一覧</p>
+
+	<ul class="cert-list">
+		{
+			certifications.map((cert) => (
+				<li class="cert-item">
+					<div class="cert-name">
+						{cert.url ? (
+							<a href={cert.url} target="_blank" rel="noopener noreferrer">
+								{cert.name}
+							</a>
+						) : (
+							cert.name
+						)}
+					</div>
+					<div class="cert-meta">
+						<span class="cert-issuer">{cert.issuer}</span>
+						<span class="cert-date">{cert.date}</span>
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</Layout>
+
+<style>
+	.cert-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.cert-item {
+		padding: 1rem 0;
+		border-bottom: 1px solid rgba(var(--gray), 0.2);
+	}
+	.cert-item:last-child {
+		border-bottom: none;
+	}
+	.cert-name {
+		font-weight: 700;
+		font-size: 1.1rem;
+	}
+	.cert-name a {
+		color: rgb(var(--accent));
+	}
+	.cert-meta {
+		display: flex;
+		gap: 1rem;
+		margin-top: 0.25rem;
+		color: rgb(var(--gray));
+		font-size: 0.95rem;
+	}
+</style>
