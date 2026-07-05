@@ -13,7 +13,7 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
-			category: z.string().default('Uncategorized'),
+			category: z.enum(['Game Security', 'Malware', 'Web', 'Pentest']),
 		}),
 });
 

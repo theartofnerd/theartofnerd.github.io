@@ -58,7 +58,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 						のんびり書いていく予定です。
 					</p>
 
-					<div class="section-title">■ さいしんじょうほう ■</div>
+					<div class="section-title">■ What's new ■</div>
 					<ul class="news">
 						<li>2000/01/01 - ホームページを開設しました！</li>
 						<li>2000/01/01 - 掲示板を設置しました！</li>
@@ -86,7 +86,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		</div>
 
 		<script is:inline>
-			// カウンター風の演出（ダミー）。訪問ごとに少しだけ増やす見た目
 			const base = 123;
 			const el = document.getElementById('counter');
 			if (el) {
@@ -174,6 +173,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				display: block;
 				color: #0000ee;
 				text-decoration: none;
+				white-space: nowrap;
 				padding: 3px 0;
 				font-size: 13px;
 			}
