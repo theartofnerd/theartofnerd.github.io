@@ -1,20 +1,270 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
-		<Header />
-		<main>
-			<p>a</p>
-		</main>
-		<Footer />
+	<body class="retro-body">
+		<!-- トップバナー -->
+		<div class="banner">
+			<div class="banner-title">☆ Welcome to My Homepage ☆</div>
+			<div class="banner-sub">~ theartofnerd's cyber space ~</div>
+		</div>
+
+		<!-- マーキー -->
+		<div class="marquee">
+			<div class="marquee-inner">
+				◄◄ このサイトは2000年に作られました！！ Netscape で見てね！ ★ キリ番ふんだら掲示板で報告してね(^o^)/ ►►
+			</div>
+		</div>
+
+		<!-- 本体（2カラム） -->
+		<table class="layout" cellpadding="0" cellspacing="0">
+			<tr>
+				<!-- 左メニュー -->
+				<td class="nav-cell">
+					<div class="nav-box">
+						<div class="nav-head">- MENU -</div>
+						<a href="/">★ TOP</a>
+						<a href="/blog">★ にっき</a>
+						<a href="/about">★ プロフィール</a>
+						<a href="/certifications">★ しかく</a>
+						<a href="/blog">★ リンク</a>
+					</div>
+
+					<!-- アクセスカウンター -->
+					<div class="counter-box">
+						<div class="counter-label">あなたは</div>
+						<div class="counter-num" id="counter">000123</div>
+						<div class="counter-label">人目の訪問者</div>
+					</div>
+				</td>
+
+				<!-- メイン -->
+				<td class="main-cell">
+					<p class="welcome">ようこそいらっしゃいました！！(^o^)/</p>
+
+					<div class="construction">🚧 工事中 🚧</div>
+
+					<p class="text">
+						セキュリティエンジニアの
+						<span class="blink">theartofnerd</span>
+						の個人サイトです。
+						アプリケーションセキュリティやリバースエンジニアリングについて
+						のんびり書いていく予定です。
+					</p>
+
+					<div class="section-title">■ さいしんじょうほう ■</div>
+					<ul class="news">
+						<li>2000/01/01 - ホームページを開設しました！</li>
+						<li>2000/01/01 - 掲示板を設置しました！</li>
+						<li>2000/01/01 - リンクを追加しました！</li>
+					</ul>
+
+					<div class="section-title">■ このサイトについて ■</div>
+					<p class="text">
+						リンクフリーです。相互リンク募集中！
+						感想は掲示板まで！
+					</p>
+
+					<div class="webring">
+						[ <a href="/blog">前へ</a> | <a href="/">HOME</a> | <a href="/blog">次へ</a> ]
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		<!-- フッター -->
+		<div class="footer">
+			<hr class="rainbow" />
+			Copyright © 2000 theartofnerd. All Rights Reserved.<br />
+			推奨環境: Netscape Navigator 4.0 / 800×600
+		</div>
+
+		<script is:inline>
+			// カウンター風の演出（ダミー）。訪問ごとに少しだけ増やす見た目
+			const base = 123;
+			const el = document.getElementById('counter');
+			if (el) {
+				const n = base + Math.floor(Math.random() * 7);
+				el.textContent = String(n).padStart(6, '0');
+			}
+		</script>
+
+		<style>
+			.retro-body {
+				margin: 0;
+				background: #ffffcc;
+				color: #663300;
+				font-family: 'Comic Sans MS', 'MS PGothic', sans-serif;
+			}
+
+			/* バナー */
+			.banner {
+				background: #000066;
+				text-align: center;
+				padding: 14px 0;
+				border-bottom: 3px solid #ff00ff;
+			}
+			.banner-title {
+				color: #ffff00;
+				font-size: 26px;
+				font-weight: bold;
+			}
+			.banner-sub {
+				color: #00ffff;
+				font-size: 13px;
+			}
+
+			/* マーキー */
+			.marquee {
+				background: #ff00ff;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			.marquee-inner {
+				display: inline-block;
+				padding: 4px 0;
+				color: #ffffff;
+				font-size: 13px;
+				font-weight: bold;
+				animation: scroll-left 22s linear infinite;
+			}
+			@keyframes scroll-left {
+				from { transform: translateX(100%); }
+				to { transform: translateX(-100%); }
+			}
+
+			/* レイアウト */
+			.layout {
+				width: 100%;
+				max-width: 800px;
+				margin: 12px auto;
+			}
+			.nav-cell {
+				width: 150px;
+				vertical-align: top;
+				padding: 8px;
+			}
+			.main-cell {
+				vertical-align: top;
+				padding: 8px 16px;
+				background: #ffffff;
+				border: 2px solid #ff9900;
+			}
+
+			/* 左メニュー */
+			.nav-box {
+				background: #ccffcc;
+				border: 2px solid #009900;
+				padding: 8px;
+				margin-bottom: 12px;
+			}
+			.nav-head {
+				color: #cc0066;
+				font-weight: bold;
+				text-align: center;
+				margin-bottom: 8px;
+			}
+			.nav-box a {
+				display: block;
+				color: #0000ee;
+				text-decoration: none;
+				padding: 3px 0;
+				font-size: 13px;
+			}
+			.nav-box a:hover {
+				background: #ffff00;
+				text-decoration: underline;
+			}
+
+			/* カウンター */
+			.counter-box {
+				background: #000000;
+				border: 1px solid #00ff00;
+				padding: 8px;
+				text-align: center;
+			}
+			.counter-label {
+				color: #ffffff;
+				font-size: 10px;
+			}
+			.counter-num {
+				color: #00ff00;
+				font-family: 'Courier New', monospace;
+				font-size: 20px;
+				font-weight: bold;
+				letter-spacing: 2px;
+			}
+
+			/* メイン中身 */
+			.welcome {
+				color: #cc0066;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.construction {
+				display: inline-block;
+				background: #ffff00;
+				border: 2px solid #000000;
+				color: #cc0000;
+				font-weight: bold;
+				padding: 4px 12px;
+				margin: 8px 0;
+			}
+			.text {
+				font-size: 13px;
+				line-height: 1.8;
+			}
+			.section-title {
+				background: #ffcc00;
+				color: #663300;
+				font-weight: bold;
+				padding: 3px 8px;
+				margin: 16px 0 8px;
+			}
+			.news {
+				font-size: 13px;
+				line-height: 1.9;
+				padding-left: 20px;
+			}
+			.webring {
+				text-align: center;
+				margin: 20px 0;
+				font-size: 13px;
+			}
+			.webring a {
+				color: #0000ee;
+			}
+
+			/* 点滅 */
+			.blink {
+				color: #ff0000;
+				font-weight: bold;
+				animation: blink 1s step-start infinite;
+			}
+			@keyframes blink {
+				50% { opacity: 0; }
+			}
+
+			/* フッター */
+			.footer {
+				text-align: center;
+				font-size: 11px;
+				color: #996633;
+				padding: 12px;
+			}
+			.rainbow {
+				height: 4px;
+				border: 0;
+				background: linear-gradient(to right, red, orange, yellow, green, blue, violet);
+				max-width: 800px;
+				margin: 8px auto;
+			}
+		</style>
 	</body>
 </html>
