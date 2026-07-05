@@ -1,8 +1,13 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
 
-// ここに資格を追加・編集していく
+
 const certifications = [
+	{
+		name: 'Zero2Automated',
+		issuer: 'Zero2Automated',
+		date: '2023年8月26日'
+	},
 	{
 		name: 'OSCE3(Offsec Certified Expert 3)',
 		issuer: 'Offsec',
@@ -48,13 +53,63 @@ const certifications = [
 		issuer: 'Offsec',
 		date: '2023年3月3日'
 	},
+	{
+		name: 'OSWA(Offsec Web Assessor)',
+		issuer: 'Offsec',
+		date: '2024年4月14日'
+	},
+	{
+		name: 'OSWP(Offsec Wireless Professional)',
+		issuer: 'Offsec',
+		date: '2024年5月5日'
+	},
+	{
+		name: 'KLCP(Kali Linux Certified Professional)',
+		issuer: 'Offsec',
+		date: '202年6月30日'
+	},
+	{
+		name: 'OSCC(Offsec CyberCore Security Essentials)',
+		issuer: 'Offsec',
+		date: '2023年3月3日'
+	},
+	{
+		name: 'OSCC-SJD(Offsec CyberCore Secure Java Development Essentials)',
+		issuer: 'Offsec',
+		date: '2025年3月21日'
+	},
+	{
+		name: 'eJPTv2(eLearn Security Junior Penetration Tester)',
+		issuer: 'INE',
+		date: '2023年10月21日'
+	},
+	{
+		name: 'eCPPTv2(eLearn Security Certified Professional Penetration Tester)',
+		issuer: 'INE',
+		date: '2023年12月1日'
+	},
+	{
+		name: 'eCIR(eLearn Security Certified Incident Responder)',
+		issuer: 'INE',
+		date: '2023年12月15日'
+	},
+	{
+		name: 'eCTHPv2(eLearn Security Certified Threat Hunting Professional)',
+		issuer: 'INE',
+		date: '2023年11月30日'
+	},
+	{
+		name: 'eCDFP(eLearn Security Digital Forensics Professional)',
+		issuer: 'INE',
+		date: '2023年9月17日'
+	},
 ];
 ---
 
 <Layout
 	title="Certifications"
 	description="取得した資格の一覧"
-	pubDate={new Date('July 05 2026')}
+	pubDate={new Date('')}
 >
 	<p>取得した資格の一覧（執行済み含む）</p>
 
