@@ -9,6 +9,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// 記事から実際に使われているカテゴリ一覧を作る
+const categories = [...new Set(posts.map((p) => p.data.category))].sort();
 ---
 
 <!doctype html>
@@ -21,11 +24,23 @@ const posts = (await getCollection('blog')).sort(
 		<div class="page-wrap">
 			<div class="content-box">
 				<h1 class="page-title">■ にっき / Blog ■</h1>
+
+				<div class="cat-filter">
+					<span class="cat-label">カテゴリ:</span>
+					<button class="cat-btn on" data-cat="all">すべて</button>
+					{
+						categories.map((cat) => (
+							<button class="cat-btn" data-cat={cat}>{cat}</button>
+						))
+					}
+				</div>
+
 				<ul class="post-list">
 					{
 						posts.map((post) => (
-							<li>
+							<li class="post-item" data-cat={post.data.category}>
 								<a href={`/blog/${post.id}/`}>★ {post.data.title}</a>
+								<span class="cat-tag">{post.data.category}</span>
 								<span class="date">
 									(<FormattedDate date={post.data.pubDate} />)
 								</span>
@@ -36,6 +51,32 @@ const posts = (await getCollection('blog')).sort(
 			</div>
 		</div>
 		<Footer />
+
+		<script is:inline>
+			const params = new URLSearchParams(location.search);
+			const initial = params.get('cat') || 'all';
+
+			function applyFilter(cat) {
+				document.querySelectorAll('.post-item').forEach((li) => {
+					const match = cat === 'all' || li.dataset.cat === cat;
+					li.style.display = match ? '' : 'none';
+				});
+				document.querySelectorAll('.cat-btn').forEach((btn) => {
+					btn.classList.toggle('on', btn.dataset.cat === cat);
+				});
+			}
+
+			document.querySelectorAll('.cat-btn').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					const cat = btn.dataset.cat;
+					applyFilter(cat);
+					const url = cat === 'all' ? '/blog/' : `/blog/?cat=${encodeURIComponent(cat)}`;
+					history.replaceState(null, '', url);
+				});
+			});
+
+			applyFilter(initial);
+		</script>
 
 		<style>
 			.retro-body {
@@ -61,23 +102,57 @@ const posts = (await getCollection('blog')).sort(
 				padding: 6px 10px;
 				margin: 0 0 16px;
 			}
+			.cat-filter {
+				margin-bottom: 16px;
+				padding-bottom: 12px;
+				border-bottom: 2px solid #ffcc00;
+			}
+			.cat-label {
+				font-size: 12px;
+				margin-right: 6px;
+			}
+			.cat-btn {
+				font-family: inherit;
+				font-size: 12px;
+				color: #0000ee;
+				background: #ccffcc;
+				border: 1px solid #009900;
+				padding: 3px 10px;
+				margin: 2px;
+				cursor: pointer;
+			}
+			.cat-btn:hover {
+				background: #ffff00;
+			}
+			.cat-btn.on {
+				background: #ffcc00;
+				color: #663300;
+				font-weight: bold;
+			}
 			.post-list {
 				list-style: none;
 				padding: 0;
 				margin: 0;
 			}
-			.post-list li {
+			.post-item {
 				padding: 6px 0;
 				border-bottom: 1px dashed #ff9900;
 				font-size: 14px;
 			}
-			.post-list a {
+			.post-item a {
 				color: #0000ee;
 				text-decoration: none;
 			}
-			.post-list a:hover {
+			.post-item a:hover {
 				background: #ffff00;
 				text-decoration: underline;
+			}
+			.cat-tag {
+				background: #ffe0b3;
+				color: #994d00;
+				font-size: 10px;
+				padding: 1px 6px;
+				margin-left: 8px;
 			}
 			.date {
 				color: #996633;
