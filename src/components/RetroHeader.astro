@@ -1,0 +1,79 @@
+---
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<div class="banner">
+	<div class="banner-title">☆ The Art of Nerd ☆</div>
+	<div class="banner-sub">~ theartofnerd's cyber space ~</div>
+</div>
+
+<div class="marquee">
+	<div class="marquee-inner">
+		◄◄ このサイトは2000年に作られました！！ Netscape で見てね！ ★ キリ番ふんだら掲示板で報告してね(^o^)/ ►►
+	</div>
+</div>
+
+<div class="nav-box">
+	<a href="/" class={isActive('/') ? 'on' : ''}>★ TOP</a>
+	<a href="/blog" class={isActive('/blog') ? 'on' : ''}>★ にっき</a>
+	<a href="/certifications" class={isActive('/certifications') ? 'on' : ''}>★ しかく</a>
+	<a href="/about" class={isActive('/about') ? 'on' : ''}>★ プロフィール</a>
+</div>
+
+<style>
+	.banner {
+		background: #000066;
+		text-align: center;
+		padding: 14px 0;
+		border-bottom: 3px solid #ff00ff;
+	}
+	.banner-title {
+		color: #ffff00;
+		font-size: 26px;
+		font-weight: bold;
+	}
+	.banner-sub {
+		color: #00ffff;
+		font-size: 13px;
+	}
+	.marquee {
+		background: #ff00ff;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	.marquee-inner {
+		display: inline-block;
+		padding: 4px 0;
+		color: #fff;
+		font-size: 13px;
+		font-weight: bold;
+		animation: scroll-left 22s linear infinite;
+	}
+	@keyframes scroll-left {
+		from { transform: translateX(100%); }
+		to { transform: translateX(-100%); }
+	}
+	.nav-box {
+		background: #ccffcc;
+		border: 2px solid #009900;
+		padding: 6px;
+		text-align: center;
+	}
+	.nav-box a {
+		display: inline-block;
+		color: #0000ee;
+		text-decoration: none;
+		padding: 4px 10px;
+		font-size: 14px;
+	}
+	.nav-box a:hover {
+		background: #ffff00;
+		text-decoration: underline;
+	}
+	.nav-box a.on {
+		background: #ffcc00;
+		font-weight: bold;
+	}
+</style>
